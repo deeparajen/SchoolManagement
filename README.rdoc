@@ -1,0 +1,1 @@
+This is a clone of IMDB I made in Rails. Notable gems include Devise for login/registration and searchkick for searching function. I also used raty.js for the star rating. 

@@ -1,0 +1,87 @@
+	
+<%= form_for @student, :html => { :class => "form-horizontal student" } do |f| %>
+
+ 
+ <% if @student.errors.any? %>
+    <div id="error_expl" class="panel panel-danger">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= pluralize(@student.errors.count, "error") %> prohibited this student from being saved:</h3>
+      </div>
+      <div class="panel-body">
+        <ul>
+        <% @student.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    </div>
+<% end %>
+
+
+<div class="form-group">
+  <%= f.label :name ,:class => 'col-md-4 control-label'%>
+  <div class="col-md-6">
+  	<%= f.text_field :name, :class => 'form-control' %>
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+   <%= f.label :roll_no, :class => 'col-md-4 control-label' %>
+  <div class="col-md-6">
+  	<%= f.text_field :roll_no, :class => 'form-control input-md' %>
+  </div>
+</div>
+
+<!-- Password input-->
+<div class="form-group">
+  <%= f.label :grade_id, :class => 'col-md-4 control-label' %>
+  <div class="col-md-6">
+  	 <%=  f.select :grade_id, options_for_select(Grade.all.collect {|c| [c.grade_name, c.id]},:selected => @student.grade_id), { :include_blank => "Please select Class"}, {:class => "form-control"}%>
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+ 	<%= f.label :father_name, :class => 'col-md-4 control-label' %>
+  <div class="col-md-6">
+  	<%= f.text_field :father_name, :class => 'form-control input-md' %>
+  </div>
+</div>
+
+<!-- Select Basic -->
+<div class="form-group">
+  <%= f.label :mobile_no, :class => 'col-md-4 control-label' %>
+  <div class="col-md-6">
+  	<%= f.text_field :mobile_no, :class => 'form-control input-md' %>
+  </div>
+</div>
+
+<div class="form-group">
+    <%= f.label :gender, :class => 'col-md-4 control-label' %>
+                    <div class="col-md-6">
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <%= f.radio_button :gender, 'Male', :checked => true ,:class => "radio-inline"%> 
+  								<%= label :gender, 'Male' %>
+                            </div>
+                            <div class="col-sm-4">
+                                <%= f.radio_button :gender, 'Female',:class => "radio-inline" %>
+  								<%= label :gender, 'Female' %>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div> <!-- /.form-
+
+<!-- Button -->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="submit"></label>
+  <div class="col-md-3">
+  	<%= f.submit :class => "btn btn-success" %></div>
+  	<div class="col-md-3"><%= link_to "Cancel", students_path, {:class=>"btn btn-default"} %>
+  </div>
+</div>
+
+
+<%end%>

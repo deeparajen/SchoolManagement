@@ -1,0 +1,40 @@
+
+    <div class="row">
+			<div class="col-md-6">
+				<div class="panel panel-primary">
+					<div class="panel-heading">
+						<h3 class="panel-title">Listing Classes</h3>
+						<div class="pull-right" style= "text-align: center;line-height: 1px;">
+								<%= link_to 'Add Class', new_grade_path, {:style => "color: inherit;text-align: center"}%>
+						</div>
+					</div>
+					
+					<table class="table table-bordered" id="dev-table">
+						<thead>
+							<tr>
+								<th>#</th>
+								<th>Class Name</th>
+								<th colspan="2" style="text-align: center">Action</th>
+								
+							</tr>
+						</thead>
+						<tbody>
+							<%i =0%>
+							<% @grades.each do |grade| %>
+								<tr>
+								<td><%= i+ 1%></td>
+								<td> <%= grade.grade_name%>	</td>
+								<td><%= link_to 'Edit', edit_grade_path(grade) %></td>
+								<td><%= link_to 'Destroy', grade_path(grade),
+              method: :delete,
+              data: { confirm: 'Are you sure?' } %></td>
+								</tr>
+								<%i=i+1%>
+							<%end%>
+							
+						</tbody>
+					</table>
+				</div>
+			</div>
+			
+		</div>

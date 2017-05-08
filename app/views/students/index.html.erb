@@ -1,0 +1,74 @@
+
+    <div class="row">
+			<div class="col-md-6">
+				<div class="panel panel-primary">
+					<div class="panel-heading">
+						<h3 class="panel-title">Listing Students</h3>
+						<div class="pull-right" style= "line-height: 1px;">
+							<%= link_to 'Add Student', new_student_path, {:style => "color: inherit;text-align: center"}%>
+						</div>
+					</div>
+					
+					<table class="table table-bordered" id="dev-table">
+						<thead>
+							<tr>
+								<th>#</th>
+								<th>Student Name</th>
+								<th>Roll Number</th>
+								<th>Mobile Number</th>
+								<th>Grade</th>
+								<th colspan="2" style="text-align: center">Action</th>
+								
+							</tr>
+						</thead>
+						<tbody>
+							<%i =0%>
+							<% @students.each do |student| %>
+								<tr>
+								<td><%= i+ 1%></td>
+								<td> <%= student.name%></td>
+								<td> <%= student.roll_no%></td>
+								<td> <%= student.mobile_no%></td>
+								<td> <%= student.grade.grade_name%></td>
+								<td><%= link_to 'Edit', edit_student_path(student) %></td>
+								<td><%= link_to 'Destroy', student_path(student),
+              method: :delete,
+              data: { confirm: 'Are you sure?' } %></td>
+								</tr>
+								<%i=i+1%>
+							<%end%>
+							
+						</tbody>
+					</table>
+	
+				</div>
+		
+		
+					<!-- pagination begins -->	
+	<div class="row margin-twenty5-zero margin-b-zero pagination-row">
+
+    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 padding-zero">
+
+    <ul class="pagination">
+
+    <li class="disabled"> 
+    	
+    <%= will_paginate(@students,:previous_label => "&laquo;", :next_label => "&raquo;",:class=>"small-font",:outer_window => 1,:inner_window => 0) %></li>
+
+    </ul>
+
+    </div>
+
+    <div class="col-lg-6 col-md-6 col-sm-5 col-xs-6 pagination-info">
+
+    <span class="pull-right"><%= page_entries_info(@students) %></span>
+
+    </div>
+
+    </div>
+					
+				<!---- pagination end -->	
+					
+	</div>
+			
+		</div>

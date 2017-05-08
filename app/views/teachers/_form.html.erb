@@ -1,0 +1,53 @@
+<%= form_for @teacher, :html => { :class => "form-horizontal teacher" } do |f| %>
+<fieldset>
+ 
+ <% if @teacher.errors.any? %>
+    <div id="error_expl" class="panel panel-danger">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= pluralize(@teacher.errors.count, "error") %> prohibited this teacher from being saved:</h3>
+      </div>
+      <div class="panel-body">
+        <ul>
+        <% @teacher.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    </div>
+<% end %>
+
+<!-- Text input-->
+<div class="form-group">
+  <%= f.label :full_name, :class => 'col-md-4 control-label' %>
+  <div class="col-md-6">
+  	<%= f.text_field :full_name, :class => 'form-control input-md' %>
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+   <%= f.label :mobile_no, :class => 'col-md-4 control-label' %>
+  <div class="col-md-6">
+  	<%= f.text_field :mobile_no, :class => 'form-control input-md' %>
+  </div>
+</div>
+
+
+<div class="form-group">
+ 	<%= f.label :qualification, :class => 'col-md-4 control-label' %>
+  <div class="col-md-6">
+  	<%= f.text_field :qualification, :class => 'form-control input-md' %>
+  </div>
+</div>
+
+<!-- Button -->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="submit"></label>
+  <div class="col-md-3">
+  	<%= f.submit :class => "btn btn-success teacher" %></div>
+  	<div class="col-md-3"><%= link_to "Cancel", teachers_path, {:class=>"btn btn-default teacher"} %>
+  </div>
+</div>
+
+</fieldset>
+<%end%>
