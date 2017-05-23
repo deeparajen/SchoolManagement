@@ -1,15 +1,18 @@
 class TeachersController < ApplicationController
-  before_action :set_teacher, only: [:show, :edit, :update, :destroy]
+  before_action :set_teacher, only: [:edit, :update, :destroy,:update_grade]
   before_action :authenticate_user!, except: [:index, :show]
+  load_and_authorize_resource
   
-    def index
-    @teachers = Teacher.all.paginate(:page => params[:page], :per_page => 2)
+  def index
+     respond_to do |format|
+      format.html
+      format.json { render json: ::TeachersDatatable.new(view_context) }
+    end
   end
 
   # GET /movies/1
   # GET /movies/1.json
   def show
-    
   end
 
   # GET /movies/new
@@ -28,11 +31,11 @@ class TeachersController < ApplicationController
 
     respond_to do |format|
       if @teacher.save
-        format.html { redirect_to @teacher, notice: 'Staff was successfully created.' }
-        format.json { render :show, status: :created, location: @teacher }
+        format.json { head :no_content }
+        format.js
       else
-        format.html { render :new }
-        format.json { render json: @teacher.errors, status: :unprocessable_entity }
+        format.json { render json: @teacher.errors.full_messages, 
+                            status: :unprocessable_entity }
       end
     end
   end
@@ -42,12 +45,13 @@ class TeachersController < ApplicationController
   def update
     respond_to do |format|
       if @teacher.update(teacher_params)
-        format.html { redirect_to @teacher, notice: 'Teacher was successfully updated.' }
-        format.json { render :show, status: :ok, location: @teacher }
+        format.json { head :no_content }
+        format.js
       else
-        format.html { render :edit }
-        format.json { render json: @teacher.errors, status: :unprocessable_entity }
+        format.json { render json: @teacher.errors.full_messages,
+                                   status: :unprocessable_entity }
       end
+     
     end
   end
 
@@ -56,8 +60,39 @@ class TeachersController < ApplicationController
   def destroy
     @teacher.destroy
     respond_to do |format|
-      format.html { redirect_to movies_url, notice: 'Staff was successfully destroyed.' }
+      format.html { redirect_to teachers_url, notice: 'Staff was successfully destroyed.' }
       format.json { head :no_content }
+    end
+  end
+  
+  def assign_class
+    @teacher = !params[:teacher_id].nil?? Teacher.where(:id => params[:teacher_id]).first : Teacher.where(:full_name => current_user.name).first
+    @teacher = Teacher.new if @teacher.nil?
+  end
+  
+  def update_class_teacher
+    if params[:teacher].has_key?("id")
+      @teacher = Teacher.where(:id => params[:teacher][:id]).first
+    else
+      @teacher = Teacher.where(:full_name => current_user.name).first
+    end
+    @new_grades =  params[:teacher][:grade_ids].reject(&:empty?) - @teacher.grades.collect(&:id).map(&:to_s)
+    @new_grades.each do |grade|
+      @grade = Grade.where(:id => grade).first
+      @teacher.grades << @grade
+    end
+    respond_to do |format|
+        flash[:success] = "Class was successfully assigned to #{@teacher.full_name}."
+        format.html { redirect_to assign_class_url(:teacher_id => @teacher.id)}
+        format.json { head :no_content }
+    end
+  end
+  
+  def update_grade
+    @grade_ids = []
+    @grade_ids = @teacher.grades.collect(&:id).map(&:to_s)
+    respond_to do |format|
+      format.js
     end
   end
 
@@ -69,6 +104,6 @@ class TeachersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def teacher_params
-      params.require(:teacher).permit(:full_name,:mobile_no,:qualification)
+      params.require(:teacher).permit(:full_name,:mobile_no,:qualification,grade_ids:[])
     end
 end

@@ -3,6 +3,9 @@ class SendSmsController < ApplicationController
   
   def create_sms
     @sms = Sm.new
+    @teacher = Teacher.where(:full_name => current_user.name).first
+    @grades =@teacher.grades
+    #@grades= Grade.where(:id => @teacher.grades.map(&:id))
   end
   
   def update_sms

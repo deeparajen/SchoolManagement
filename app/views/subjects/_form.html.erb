@@ -1,27 +1,32 @@
-<%= form_for @subject do |f| %>
- 
-  <% if @subject.errors.any? %>
-    <div id="error_explanation">
-      <h2>
-        <%= pluralize(@subject.errors.count, "error") %> prohibited
-        this subject from being saved:
-      </h2>
-      <ul>
-        <% @subject.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
-        <% end %>
-      </ul>
-    </div>
-	<% end %>
-	
-	<p>
-    	<%= f.label :subject_name %><br>
-    	<%= f.text_field :subject_name %>
-  	</p>
-
- 
-  <p>
-    <%= f.submit %>
-  </p>
- 
-<% end %>
+   <div class="modal-dialog" role="document" style: "padding-top: 10px;">
+    <div class="modal-content">
+      <div class="modal-header">
+      	 <h3 class="modal-title"></h3>
+      	 
+        <button type="button" class="close" data-dismiss="modal"aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+       
+      </div>
+      
+      <%= form_for @subject, remote: true do |f| %>
+      <div class="modal-body">
+      	<div id="error_explanation" class="bg-danger text-danger">
+	    </div>
+	    
+      	<div class="row">
+        <div class="col-sm-3">
+        	<%= f.label :subject_name, :class => "control-label text-nowrap lbl "%></div>
+        <div class="col-sm-7 pull-left">
+          <%= f.text_field :subject_name, class: 'form-control subject_name'%>
+        </div>
+       
+       </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal",aria-hidden="true", style = "padding: 3px 6px; font-size: 14px;">Cancel</button>
+        <%= f.submit class: 'btn btn-primary', :style=> "padding: 3px 6px; font-size: 14px;"%>
+      </div>
+      <% end %>
+	</div>
+	</div>

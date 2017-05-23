@@ -1,0 +1,112 @@
+<div id="update_chk_div">
+<h3> Assign Classes</h3>
+
+
+<%= form_for @teacher,:url => update_class_teacher_path,:method => "post", :html => { :class => "form-horizontal" } do |f| %>
+   
+   	<%if current_user.role? :admin%>
+	<div class="row">
+   	  <div class="col-md-8 form-group" style="margin: 20px 0px 15px 50px;">
+    	<%= f.label :teacher, :class => "col-md-2 control-label", :style => "font-weight: bold;"%>
+   		<%=  f.select :id, options_for_select(Teacher.all.collect {|c| [c.full_name, c.id]},:selected =>@teacher.id), { :include_blank => true},{:class => "col-md-6 form-control", :onchange => "update_versions_div(this.value)"}%>
+  	  </div>
+  	</div>
+   	<%end%>
+  
+   
+	<div class="row">
+      <div class="col-sm-12 col-md-12" style="margin: 20px 0px 15px 30px;">
+      <div class="form">
+      	<%= f.collection_check_boxes :grade_ids, Grade.all, :id, :grade_name do |b| %>
+      	<div class="checkbox">
+      	 <%= b.check_box %>
+      	 <span><%= b.label %></span>
+      	 </div>
+      	<%end%>
+     </div>
+    </div>
+  	</div>
+ 
+ <div class="row">
+ 	<div class="col-md-12 text-center">
+ 		<%= f.submit :class => "btn btn-success",:value => "Assign Classes" %></div>
+ 	</div>
+ </div> 
+ 
+<%end%>
+</div>
+  
+<style>
+
+
+
+/*<div class="center form-actions">submit</div>*/
+div.center, p.center, img.center {
+    display: block;
+    float: none !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    text-align: center;
+}
+
+.form-control
+{
+	display: inline-block;
+}
+
+@media (min-width: 600px) {
+  div.form {
+    display: table;
+    width: 100%;
+  }
+  div.form .checkbox {
+    width: 25%;
+    display: inline-table;
+    margin: 5px 0;
+  }
+  
+}
+
+input[type="checkbox"] {
+    position: relative;
+    /*top: 2px;*/
+    vertical-align: middle;
+  	bottom: 1px;
+}
+
+
+
+.checkbox label
+{
+	padding-left: 10px;
+	vertical-align: top;
+	white-space: nowrap;
+}
+.select2-container--bootstrap
+{
+	display: inline-block;
+}
+</style>
+
+ <script>
+    $(document).ready(function() { $("#teacher_id").select2({
+    	width: '50%',
+    	placeholder: "Select Teacher",
+    	theme: "classic",
+    	language: "es"
+    	 });
+     });
+     
+
+  </script>
+  
+  <script>
+   function update_versions_div(teacher_id) {  
+     jQuery.ajax({
+    url: "/update_grade",
+    type: "GET",
+    data: {"id" : teacher_id},
+    dataType : "script"
+  });
+   }
+  </script>

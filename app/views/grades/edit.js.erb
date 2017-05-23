@@ -1,0 +1,7 @@
+$("#myModal").html("<%= escape_javascript(render 'grades/form',:object => @grade) %>");
+$('#myModal h3').html("Edit Class");
+$("#myModal").modal('show');
+// Set focus to the first element
+$('#myModal').on('shown.bs.modal', function () {
+	  $('.grade_name').focus()
+  })

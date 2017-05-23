@@ -1,70 +1,32 @@
+ <div class="row">
+ <div class="col-sm-12">
+<h1>Listing Teacher</h1>
 
-    <div class="row">
-			<div class="col-md-6">
-				<div class="panel panel-primary">
-					<div class="panel-heading">
-						<h3 class="panel-title">Listing Staffs</h3>
-						<div class="pull-right" style= "text-align: center;line-height: 1px;">
-								<%= link_to 'Add Staff', new_teacher_path, {:style => "color: inherit;text-align: center"}%>
-						</div>
-					</div>
-					
-					<table class="table table-bordered" id="dev-table">
-						<thead>
-							<tr>
-								<th>#</th>
-								<th>Staff Name</th>
-								<th>Mobile Number</th>
-								<th>Qualification</th>
-								<th colspan="2" style="text-align: center">Action</th>
-								
-							</tr>
-						</thead>
-						<tbody>
-							<%i =0%>
-							<% @teachers.each do |teacher| %>
-								<tr>
-								<td><%= i+ 1%></td>
-								<td> <%= teacher.full_name%></td>
-								<td> <%= teacher.mobile_no%></td>
-								<td> <%= teacher.qualification%></td>
-								<td><%= link_to 'Edit', edit_teacher_path(teacher) %></td>
-								<td><%= link_to 'Destroy', teacher_path(teacher),
-              method: :delete,
-              data: { confirm: 'Are you sure?' } %></td>
-								</tr>
-								<%i=i+1%>
-							<%end%>
-							
-						</tbody>
-					</table>
-				</div>
-							<!-- pagination begins -->	
-	<div class="row margin-twenty5-zero margin-b-zero pagination-row">
+<div class="text-right">
+	<% if can? :create, Teacher %>
+		<%= link_to "New Teacher", new_teacher_path, :class => "btn btn-primary success", :remote => true, :style=> "padding: 3px 6px; font-size: 14px;" %>
+	<%end%>
+</div>
+ 
+  <!-- <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  </div> -->
 
-    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 padding-zero" >
+<table id="teachers" class="display table dataTable table-striped table-bordered table-condensed pretty" data-source="<%= teachers_url(format: "json") %>" >
+  <thead>
+    <tr>
+      <th>Student Name</th>
+      <th>Qualification</th>
+      <th>Mobile Number</th>
+      <% if can? :update && :destory, Teacher %>
+      <th>Actions</th>
+      <th>&nbsp;</th>
+      <%end%>
+   </tr>
+  </thead>
+  <tbody>
+  </tbody>
+</table>
+<%= render 'dialog' %>
+</div>
+</div>
 
-    <ul class="pagination">
-
-    <li class="disabled"> 
-    	
-    <%= will_paginate(@teachers,:previous_label => "&laquo;", :next_label => "&raquo;",:class=>"small-font",:outer_window => 1,:inner_window => 0) %></li>
-
-    </ul>
-
-    </div>
-
-    <div class="col-lg-6 col-md-6 col-sm-5 col-xs-6 pagination-info">
-
-    <span class="pull-right"><%= page_entries_info(@teachers) %></span>
-
-    </div>
-
-    </div>
-					
-				<!---- pagination end -->
-				
-			</div>
-		
-		</div>
-		

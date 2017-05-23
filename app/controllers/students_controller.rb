@@ -1,37 +1,26 @@
 class StudentsController < ApplicationController
-  before_action :set_student, only: [:show, :edit, :update, :destroy]
+  before_action :set_student, only: [:edit, :update, :destroy]
   before_action :authenticate_user!, except: [:index, :show]
-  
+  load_and_authorize_resource
+
   # GET /students
   # GET /students.json
   def index
-    @students = Student.all.paginate(:page => params[:page], :per_page => 2)
-
     respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @students }
+      format.html
+      format.json { render json: ::StudentsDatatable.new(view_context) }
     end
   end
 
   # GET /students/1
   # GET /students/1.json
   def show
-  
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @student }
-    end
   end
 
   # GET /students/new
   # GET /students/new.json
   def new
     @student = Student.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @student }
-    end
   end
 
   # GET /students/1/edit
@@ -45,27 +34,28 @@ class StudentsController < ApplicationController
 
     respond_to do |format|
       if @student.save
-        format.html { redirect_to @student, notice: 'Student was successfully created.' }
-        format.json { render json: @student, status: :created, location: @student }
+        format.json { head :no_content }
+        format.js
       else
-        format.html { render action: "new" }
-        format.json { render json: @student.errors, status: :unprocessable_entity }
+        format.json { render json: @student.errors.full_messages, 
+                            status: :unprocessable_entity }
       end
+      
     end
   end
 
   # PUT /students/1
   # PUT /students/1.json
   def update
-   
     respond_to do |format|
-      if @student.update_attributes(student_params)
-        format.html { redirect_to @student, notice: 'Student was successfully updated.' }
+      if @student.update(student_params)
         format.json { head :no_content }
+        format.js
       else
-        format.html { render action: "edit" }
-        format.json { render json: @student.errors, status: :unprocessable_entity }
+        format.json { render json: @student.errors.full_messages,
+                                   status: :unprocessable_entity }
       end
+     
     end
   end
 
@@ -73,8 +63,8 @@ class StudentsController < ApplicationController
   # DELETE /students/1.json
   def destroy
     @student.destroy
-
     respond_to do |format|
+      format.js
       format.html { redirect_to students_url }
       format.json { head :no_content }
     end

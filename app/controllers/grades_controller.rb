@@ -1,17 +1,21 @@
 class GradesController < ApplicationController
-  before_action :set_grade, only: [:show, :edit, :update, :destroy]
+  before_action :set_grade, only: [:edit, :update, :destroy]
   before_action :authenticate_user!, except: [:index, :show]
   
   def index
-    @grades = Grade.all
+    respond_to do |format|
+      format.html
+      format.json { render json: ::GradesDatatable.new(view_context) }
+    end
   end
 
-  def show
-    
-  end
+
 
   def new
     @grade = Grade.new
+    respond_to do |format|
+      format.js {}
+    end
   end
 
   def edit
@@ -20,26 +24,38 @@ class GradesController < ApplicationController
 
   def create
     @grade = Grade.new(grade_params)
-
-    if @grade.save
-      redirect_to @grade
-    else
-      render 'new'
+    respond_to do |format|
+      if @grade.save
+        flash[:success] = "Class #{@grade.grade_name} added successfully." 
+        format.json { head :no_content }
+        format.js
+      else
+        format.json { render json: @grade.errors.full_messages, 
+                            status: :unprocessable_entity }
+      end
+      
     end
+    
   end
 
   def update
-  
-    if @grade.update(grade_params)
-      redirect_to @grade
-    else
-      render 'edit'
+      
+    respond_to do |format|
+      if @grade.update(grade_params)
+        flash[:success] = "Class #{@grade.grade_name} updated successfully."
+        format.json { head :no_content }
+        format.js
+      else
+        format.json { render json: @grade.errors.full_messages,
+                                   status: :unprocessable_entity }
+      end
+     
     end
   end
 
   def destroy
     @grade.destroy
-
+    flash[:success] = "Class #{@grade.grade_name} deleted successfully."
     redirect_to grades_path
   end
   

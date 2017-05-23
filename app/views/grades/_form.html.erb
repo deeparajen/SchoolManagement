@@ -1,27 +1,41 @@
-<%= form_for @grade do |f| %>
- 
-  <% if @grade.errors.any? %>
-    <div id="error_explanation">
-      <h2>
-        <%= pluralize(@grade.errors.count, "error") %> prohibited
-        this grade from being saved:
-      </h2>
-      <ul>
-        <% @grade.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
-        <% end %>
-      </ul>
-    </div>
-	<% end %>
-	
-	<p>
-    	<%= f.label :grade_name %><br>
-    	<%= f.text_field :grade_name %>
-  	</p>
+   <div class="modal-dialog" role="document" style: "padding-top: 10px;">
+    <div class="modal-content">
+      <div class="modal-header">
+      	 <h3 class="modal-title"></h3>
+      	 
+        <button type="button" class="close" data-dismiss="modal"aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+       
+      </div>
+      
+      <%= form_for @grade, remote: true do |f| %>
+      
+      
+      <div class="modal-body">
+      	<div id="error_explanation" class="bg-danger text-danger">
+	    </div>
+	    
+      	<div class="row">
+      	<div class="col-sm-3">
+        	<%= f.label :grade_name, :class => "control-label text-nowrap lbl"%></div>
+        <div class="col-sm-7 pull-left">
+          <%= f.text_field :grade_name, class: 'form-control grade_name'%>
+        </div>
+       
+       </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal",aria-hidden="true", style = "padding: 3px 6px; font-size: 14px;">Cancel</button>
+        <%= f.submit class: 'btn btn-primary', :style=> "padding: 3px 6px; font-size: 14px;"%>
+      </div>
+      <% end %>
+	</div>
+	</div>
 
- 
-  <p>
-    <%= f.submit %>
-  </p>
- 
-<% end %>
+<style>
+.lbl {
+	font-weight: bold;
+	padding: 10px 0px 0px 12px;
+}
+</style>

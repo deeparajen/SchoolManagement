@@ -1,36 +1,48 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <title>Imdbclone</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <%= csrf_meta_tags %>
-</head>
-<body>
-	<div id="header">
-    	<%= render 'layouts/header' %>
-   </div>
-  <!-- <div id="fix-for-navbar-fixed-top-spacing" style="height: 100px;">&nbsp;</div> -->
-   <div id="main-container" class="container">
-      <div class="row">
-        <div class="col-xs-12">
+<html lang="en">
+  <head>
+    <title>School Management</title>
+    <%= csrf_meta_tags %>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+
+    <%= render 'layouts/header' %>
+    
+  
+   
+    <div class="container">
+    	
+    <div class="row">
+        <div class="col-xs-12 col-md-12" id="flash-msg">
           <% flash.each do |name, msg| -%>
-            <%= content_tag :div, msg, class: "alert alert-#{name}" %>
+            <%= content_tag :div, msg, class: "alert alert-#{name}", :id => "flash_#{name}"%>
           <% end -%>
         </div>
+        
       </div>
+	
+    	
       <div class="row">
-       <div class="col-xs-12">
+      	
+        <div class="col-sm-8 blog-main">
           <%= yield %>
-        </div>
-      </div>
-    </div>
+        </div><!-- /.blog-main -->
 
-    
+        
+      </div><!-- /.row -->
+
+    </div><!-- /.container -->
+
+ 
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </body>
-
-
 </html>

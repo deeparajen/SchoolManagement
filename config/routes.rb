@@ -8,16 +8,14 @@ Rails.application.routes.draw do
   
   root 'home#index'
   
+  get "assign_class", to: "teachers#assign_class", :as => "assign-class"
+  post "update_class_teacher", to: "teachers#update_class_teacher"
+  get "update_grade" => "teachers#update_grade"
   get "sms", to: "send_sms#create_sms"
   post 'send_sms', to: "send_sms#update_sms"
   get 'send_sms/update_student_list', :as => 'update_student_list'
   
-  resources :movies do 
-    collection do 
-      get 'search'
-    end
-    resources :reviews, except: [:show, :index]
-  end 
+  
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

@@ -1,17 +1,19 @@
 class SubjectsController < ApplicationController
-  before_action :set_subject, only: [:show, :edit, :update, :destroy]
+  before_action :set_subject, only: [ :edit, :update, :destroy]
   before_action :authenticate_user!, except: [:index, :show]
   
   def index
-    @subjects = Subject.all
-  end
-
-  def show
-    
+    respond_to do |format|
+      format.html
+      format.json { render json: ::SubjectsDatatable.new(view_context) }
+    end
   end
 
   def new
     @subject = Subject.new
+    respond_to do |format|
+      format.js {}
+    end
   end
 
   def edit
@@ -21,19 +23,31 @@ class SubjectsController < ApplicationController
   def create
     @subject = Subject.new(subject_params)
 
-    if @subject.save
-      redirect_to @subject
-    else
-      render 'new'
+   respond_to do |format|
+      if @subject.save
+        flash[:success] = "Subject #{@subject.subject_name} added successfully." 
+        format.json { head :no_content }
+        format.js
+      else
+        format.json { render json: @subject.errors.full_messages, 
+                            status: :unprocessable_entity }
+      end
+      
     end
   end
 
   def update
   
-    if @subject.update(subject_params)
-      redirect_to @subject
-    else
-      render 'edit'
+    respond_to do |format|
+      if @subject.update(subject_params)
+        flash[:success] = "Subject #{@subject.subject_name} updated successfully."
+        format.json { head :no_content }
+        format.js
+      else
+        format.json { render json: @subject.errors.full_messages,
+                                   status: :unprocessable_entity }
+      end
+     
     end
   end
 

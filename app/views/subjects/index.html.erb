@@ -1,40 +1,31 @@
+ <div class="row">
+    <div class="col-sm-12">
+<h1>Listing Subjects</h1>
 
-    <div class="row">
-			<div class="col-md-6">
-				<div class="panel panel-primary">
-					<div class="panel-heading">
-						<h3 class="panel-title">Listing Subjects</h3>
-						<div class="pull-right" style= "text-align: center;line-height: 1px;">
-							<%= link_to 'Add Subject', new_subject_path, {:style => "color: inherit;text-align: center"}%>
-						</div>
-					</div>
-					
-					<table class="table table-bordered" id="dev-table">
-						<thead>
-							<tr>
-								<th>#</th>
-								<th>Subject Name</th>
-								<th colspan="2" style="text-align: center">Action</th>
-								
-							</tr>
-						</thead>
-						<tbody>
-							<%i =0%>
-							<% @subjects.each do |subject| %>
-								<tr>
-								<td><%= i+ 1%></td>
-								<td> <%= subject.subject_name%>	</td>
-								<td><%= link_to 'Edit', edit_subject_path(subject) %></td>
-								<td><%= link_to 'Destroy', subject_path(subject),
-              method: :delete,
-              data: { confirm: 'Are you sure?' } %></td>
-								</tr>
-								<%i=i+1%>
-							<%end%>
-							
-						</tbody>
-					</table>
-				</div>
-			</div>
-			
-		</div>
+<div class="text-right">
+	<% if can? :create, Subject %>
+		<%= link_to "New Subject", new_subject_path, :class => "btn btn-primary success", :remote => true,  "data-target" => "#myModal",:style=> "padding: 3px 6px; font-size: 14px;" %>
+	<%end%>
+</div>
+
+
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  </div>
+
+<table id="subjects" class="display table dataTable table-striped table-bordered table-condensed pretty" data-source="<%= subjects_url(format: "json") %>" >
+  <thead>
+    <tr>
+      <th>Subject Name</th>
+      <% if can? :update && :destroy, Subject %>
+      <th>Actions</th>
+      <th>&nbsp;</th>
+      <%end%>
+   </tr>
+  </thead>
+  <tbody>
+  </tbody>
+</table>
+</div>
+</div>
+
+

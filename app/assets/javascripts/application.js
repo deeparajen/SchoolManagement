@@ -11,8 +11,25 @@
 // about supported directives.
 //
 //= require jquery
-//= require jquery_ujs
-//= require turbolinks
 //= require bootstrap-sprockets
+//= require jquery_ujs
+//= require jquery-ui
+//= require dataTables/jquery.dataTables
+//= require select2
+//= require select2_locale_pt-BR
+//= require turbolinks
 //= require_tree .
 
+// to handle modal box form validation
+$(document).ajaxError(function(event,xhr,options,exc) {
+    
+    var errors = JSON.parse(xhr.responseText);
+    var er ="<ul>";
+    for(var i = 0; i < errors.length; i++){
+        var list = errors[i];
+        er += "<li>"+list+"</li>";
+    }
+    er+="</ul>";
+    $("#error_explanation").html(er);
+       
+});
