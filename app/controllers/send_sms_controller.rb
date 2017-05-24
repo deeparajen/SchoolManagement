@@ -2,27 +2,29 @@ class SendSmsController < ApplicationController
   before_action :authenticate_user!
   
   def create_sms
-    @sms = Sm.new
     @teacher = Teacher.where(:full_name => current_user.name).first
     @grades =@teacher.grades
     #@grades= Grade.where(:id => @teacher.grades.map(&:id))
   end
   
   def update_sms
-    @flag = false
-    params[:student][:id].each do |id|
-      @sms = Sm.create(:student_id => id,:teacher_id => current_user.id,:sms_content => params[:sms_content])
+    @flag=false
+    @students = Student.where(:grade_id => params[:sm][:id])
+    @students.each do |id|
+      @sms = Sm.create(:student_id => id,:teacher_id => current_user.id,:task_date => params[:sm][:task_date],:sms_content => params[:sm][:sms_content])
       if @sms.save
-        @flag = true
+        @flag=true
+      else
+        @flag=false
       end
-      
     end
     respond_to do |format|
       if @flag
-        format.html { redirect_to sms_path, notice: 'SMS send successfully' }
+        flash[:success] = 'SMS send successfully'
+        format.html { redirect_to sms_path }
       else
-        format.html { render action: "create_sms" }
-        format.json { render json: @student.errors, status: :unprocessable_entity }
+        format.html { redirect_to sms_path }
+        format.json { render json: @sms.errors, status: :unprocessable_entity }
       end
     end
   end

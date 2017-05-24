@@ -20,6 +20,8 @@
 //= require turbolinks
 //= require_tree .
 
+//= require bootstrap-datepicker
+
 // to handle modal box form validation
 $(document).ajaxError(function(event,xhr,options,exc) {
     

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170521162312) do
+ActiveRecord::Schema.define(version: 20170523172517) do
 
   create_table "Grades_Teachers", id: false, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "grade_id",   null: false
@@ -86,6 +86,7 @@ ActiveRecord::Schema.define(version: 20170521162312) do
     t.string   "sms_content"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.datetime "task_date"
     t.index ["student_id"], name: "index_sms_on_student_id", using: :btree
     t.index ["teacher_id"], name: "index_sms_on_teacher_id", using: :btree
   end

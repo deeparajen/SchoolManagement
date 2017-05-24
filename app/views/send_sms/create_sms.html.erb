@@ -5,23 +5,30 @@
 <%= form_for Sm.new,:url => send_sms_path,:method => "post", :html => { :class => "form-horizontal" } do |f| %>
    
    	<div class="row">
-   	  <div class="col-md-8 form-group" style="margin: 20px 0px 15px 50px;">
+   	  <div class="col-md-12 form-group" style="margin: 20px 0px 15px 50px;">
     	<%= f.label :grade, :class => "col-md-3 control-label", :style => "font-weight: bold;"%>
-   		<%=  f.select :id, options_for_select(@grades.collect {|c| [c.grade_name, c.id]}), { :include_blank => true},{:class => "col-md-6 form-control"}%>
+   		<%=  f.select :id, options_for_select(@grades.collect {|c| [c.grade_name, c.id]}), { :include_blank => true},{:class => "col-md-6 form-control select2"}%>
   	  </div>
   	</div>
+  	
+  	<div class="row">
+    	<div class="col-md-12 form-group" style="margin: 20px 0px 15px 50px;">
+  		<%= f.label :task_date,:class =>"col-md-3 control-label", :style => "font-weight: bold; " %>
+  		<%= f.text_field :task_date, placeholder: "task date", value: Time.now.strftime("%Y-%m-%d"), class: 'col-md-9 form-control', "data-provide" => 'datepicker', "data-date-format" => "yyyy-mm-dd", "data-date-autoclose" => "true", :style =>"width:30%" %>
+  		</div>
+	</div>
   
     <div class="row">
-    	<div class="col-md-8 form-group" style="margin: 20px 0px 15px 50px;">
+    	<div class="col-md-12 form-group" style="margin: 20px 0px 15px 50px;">
   		<%= f.label :sms_content,:class =>"col-md-3 control-label", :style => "font-weight: bold; " %>
-  		<%= f.text_area :sms_content, :class => 'col-md-6  form-control' %>
+  		<%= f.text_area :sms_content, :rows => 5, :cols => 100,:class => 'col-md-9  form-control', :style => "width: 50%"%>
   		</div>
 	</div>
    
 	
  <div class="row">
  	<div class="col-md-12 text-center">
- 		<%= f.submit :class => "btn btn-success",:value => "Assign Classes" %></div>
+ 		<%= f.submit :class => "btn btn-success",:value => "Send SMS" %></div>
  	</div>
  </div> 
  
@@ -63,16 +70,17 @@ div.center, p.center, img.center {
 {
 	display: inline-block;
 }
+
 </style>
 
 <script>
     $(document).ready(function() { $("#sm_id").select2({
-    	width: '50%',
+    	width: '30%',
     	placeholder: "Select Class",
     	theme: "classic",
-    	language: "es"
+    	language: "es",
+    	allowClear: true
     	 });
      });
      
-
-  </script>
+ </script>
