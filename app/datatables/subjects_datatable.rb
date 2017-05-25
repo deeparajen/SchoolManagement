@@ -33,7 +33,9 @@ private
   def fetch_subjects
     subjects = Subject.all
     subjects = subjects.page(page).per_page(per_page)
-    
+    if params[:sSearch].present?
+      subjects = subjects.where("subject_name like :search", search: "%#{params[:sSearch]}%")
+    end
     subjects
   end
 

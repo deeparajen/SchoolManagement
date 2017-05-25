@@ -7,9 +7,5 @@ jQuery ->
     bJQueryUI: true
     bProcessing: true
     bServerSide: true
-    bFilter: false
     "ordering": false
-    "bLengthChange": false
-    "bAutoWidth": false
-    "bStateSave": true
     sAjaxSource: $('#subjects').data('source')

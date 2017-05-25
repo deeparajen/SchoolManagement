@@ -35,7 +35,9 @@ private
   def fetch_teachers
     teachers = Teacher.all
     teachers = teachers.page(page).per_page(per_page)
-    
+    if params[:sSearch].present?
+      teachers = teachers.where("full_name like :search or qualification like :search or mobile_no like :search", search: "%#{params[:sSearch]}%")
+    end
     teachers
   end
 

@@ -38,7 +38,9 @@ private
   def fetch_students
     students = Student.joins(:grade)
     students = students.page(page).per_page(per_page)
-    
+    if params[:sSearch].present?
+      students = students.where("name like :search or roll_no like :search or father_name like :search or grade_name like :search or mobile_no like :search or gender like :search", search: "%#{params[:sSearch]}%")
+    end
     students
   end
 
