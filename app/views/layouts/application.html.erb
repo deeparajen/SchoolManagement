@@ -20,8 +20,9 @@
     <div class="row">
         <div class="col-xs-12 col-md-12" id="flash-msg">
           <% flash.each do |name, msg| -%>
-            <%= content_tag :div, msg, class: "alert alert-#{name}", :id => "flash_#{name}"%>
+            <%= content_tag :div, msg, class: "alert alert-#{['success','notice'].include?(name) ? 'success' : 'danger'}", :id => "flash_#{name}"%>
           <% end -%>
+          <%#= flash_messages %>
         </div>
         
       </div>
