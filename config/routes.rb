@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   
   root 'home#index'
   
+  get "home", :to => "home#index"
   get "assign_class", to: "teachers#assign_class", :as => "assign-class"
   post "update_class_teacher", to: "teachers#update_class_teacher"
   get "update_grade" => "teachers#update_grade"

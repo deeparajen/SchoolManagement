@@ -54,7 +54,7 @@ h6, .h6 {
   position: relative;
   padding: 1rem;
   font-weight: 500;
-  color: #cdddeb;
+  color: inherit;
 }
 .nav-link:hover,
 .nav-link:focus {
@@ -80,7 +80,14 @@ h6, .h6 {
   border-left: .3rem solid transparent;
 }
 
-
+  /*-- change navbar dropdown color --*/
+ .dropdown-menu {
+    background-color: #428bca;
+    font-size: 12px;
+  }
+  
+.dropdown-menu a:hover {background-color: lightblue;}
+  
 /*
  * Blog name and description
  */
