@@ -3,6 +3,7 @@
 /*
  * Globals
  */
+//  ----------- Blog Layout Design -----
 
 @media (min-width: 48em) {
   html {
@@ -87,6 +88,18 @@ h6, .h6 {
   }
   
 .dropdown-menu a:hover {background-color: lightblue;}
+
+
+
+.navbar-brand {
+  cursor :default;
+
+  &:hover {
+    color: black;
+    background-color: transparent;
+  }
+}
+
   
 /*
  * Blog name and description

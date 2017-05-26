@@ -20,7 +20,7 @@ private
     grades.map do |grade|
       [
         grade.grade_name,
-        link_to(image_tag('edit.png'), edit_grade_path(grade), :remote => true,  "data-target" => "#myModal"),
+        link_to(image_tag('edit.png'), edit_grade_path(grade), :remote => true,  "data-target" => "#myModal",title: "Edit"),
         link_to(image_tag('delete1.png'), grade, method: :delete, confirm: "You sure?", title: grade.grade_name),
       ]
     end
