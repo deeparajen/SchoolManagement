@@ -25,7 +25,7 @@ class SubjectsController < ApplicationController
 
    respond_to do |format|
       if @subject.save
-        flash[:success] = "Subject #{@subject.subject_name} added successfully." 
+        flash[:success] = "Subject '#{@subject.subject_name}' added successfully." 
         format.json { head :no_content }
         format.js
       else
@@ -40,7 +40,7 @@ class SubjectsController < ApplicationController
   
     respond_to do |format|
       if @subject.update(subject_params)
-        flash[:success] = "Subject #{@subject.subject_name} updated successfully."
+        flash[:success] = "Subject '#{@subject.subject_name}' updated successfully."
         format.json { head :no_content }
         format.js
       else
@@ -53,8 +53,13 @@ class SubjectsController < ApplicationController
 
   def destroy
     @subject.destroy
-
-    redirect_to subjects_path
+    respond_to do |format|
+      flash[:success] = "Subject '#{@subject.subject_name}' deleted successfully."
+      format.html { redirect_to subjects_path }
+      format.json { head :no_content }
+    end
+    
+    
   end
   
    private

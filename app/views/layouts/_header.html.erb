@@ -31,7 +31,8 @@
             <li class="nav-item active">
               <%= link_to 'Send SMS', sms_path, {:class => 'nav-link'} %>
             </li>
-            
+            <%end%>
+            <%if current_user.role? :admin%>
             <li class="nav-item dropdown">
               <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Add New <span class="caret"></span></a>
               <ul class="dropdown-menu">

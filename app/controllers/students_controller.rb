@@ -34,6 +34,7 @@ class StudentsController < ApplicationController
 
     respond_to do |format|
       if @student.save
+        flash[:success] = "Student '#{@student.name}' added successfully." 
         format.json { head :no_content }
         format.js
       else
@@ -49,6 +50,7 @@ class StudentsController < ApplicationController
   def update
     respond_to do |format|
       if @student.update(student_params)
+        flash[:success] = "Student '#{@student.name}' updated successfully."
         format.json { head :no_content }
         format.js
       else
@@ -64,8 +66,7 @@ class StudentsController < ApplicationController
   def destroy
     @student.destroy
     respond_to do |format|
-      format.js
-      format.html { redirect_to students_url }
+      format.html { redirect_to students_url, notice: "Student '#{@student.name}' was successfully deleted." }
       format.json { head :no_content }
     end
   end

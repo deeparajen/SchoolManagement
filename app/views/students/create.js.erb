@@ -1,5 +1,7 @@
 $('#dialog').modal('toggle');
 $('#students').DataTable().ajax.reload();
+$('#flash-msg').html("<%=j flash[:success] %>");
+$('#flash-msg').addClass("alert alert-success");
 console.log("<%= @student.roll_no %> <%= @student.name %> created");
 
 
