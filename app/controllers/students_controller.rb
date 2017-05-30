@@ -1,6 +1,6 @@
 class StudentsController < ApplicationController
   before_action :set_student, only: [:edit, :update, :destroy]
-  before_action :authenticate_user!, except: [:index, :show]
+  before_action :authenticate_user!, except: [:index]
   load_and_authorize_resource
 
   # GET /students
@@ -12,15 +12,10 @@ class StudentsController < ApplicationController
     end
   end
 
-  # GET /students/1
-  # GET /students/1.json
-  def show
-  end
-
+ 
   # GET /students/new
   # GET /students/new.json
   def new
-    @student = Student.new
   end
 
   # GET /students/1/edit

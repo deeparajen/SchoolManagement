@@ -1,6 +1,7 @@
 class SubjectsController < ApplicationController
   before_action :set_subject, only: [ :edit, :update, :destroy]
-  before_action :authenticate_user!, except: [:index, :show]
+  before_action :authenticate_user!, except: [:index]
+  load_and_authorize_resource
   
   def index
     respond_to do |format|
@@ -10,10 +11,6 @@ class SubjectsController < ApplicationController
   end
 
   def new
-    @subject = Subject.new
-    respond_to do |format|
-      format.js {}
-    end
   end
 
   def edit

@@ -1,6 +1,6 @@
 class TeachersController < ApplicationController
   before_action :set_teacher, only: [:edit, :update, :destroy,:update_grade]
-  before_action :authenticate_user!, except: [:index, :show]
+  before_action :authenticate_user!, except: [:index]
   load_and_authorize_resource
   
   def index
@@ -17,7 +17,6 @@ class TeachersController < ApplicationController
 
   # GET /movies/new
   def new
-    @teacher = Teacher.new
   end
 
   # GET /movies/1/edit
