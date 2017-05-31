@@ -20,7 +20,10 @@
       	<div class="col-sm-3">
         	<%= f.label :grade_name, :class => "control-label text-nowrap lbl"%></div>
         <div class="col-sm-7 pull-left">
-          <%= f.text_field :grade_name, class: 'form-control grade_name'%>
+          <%= f.text_field :grade_name, class: 'form-control grade_name', "aria-describedby" => "gradeHelpInline"%>
+          <small id="gradeHelpInline" class="form-text text-muted">
+      			(For example: IA, IB, IIA...)
+    	  </small>
         </div>
        
        </div>
