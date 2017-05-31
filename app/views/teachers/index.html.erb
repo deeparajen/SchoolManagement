@@ -14,13 +14,13 @@
 <table id="teachers" class="display table dataTable table-striped table-bordered table-condensed pretty" data-source="<%= teachers_url(format: "json") %>" >
   <thead>
     <tr>
-      <th>S.No </th>
+      <th style="width: 5%;">S.No </th>
       <th>Teacher Name</th>
       <th>Qualification</th>
       <th>Mobile Number</th>
       <% if can? :update && :destory, Teacher %>
-      <th>Actions</th>
-      <th>&nbsp;</th>
+      <th style="width: 5%;">Actions</th>
+      <th style="width: 5%;">&nbsp;</th>
       <%end%>
    </tr>
   </thead>

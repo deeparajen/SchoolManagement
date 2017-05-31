@@ -16,14 +16,14 @@
 <table id="students" class="display table dataTable table-striped table-bordered table-condensed pretty" data-source="<%= students_url(format: "json") %>" style="width:100%"%>
   <thead>
     <tr>
-      <th>S.No </th>
+      <th style="width: 5%;">S.No </th>
       <th>Student Name</th>
       <th>Roll Number</th>
       <th>Grade</th>
       <th>Father Name</th>
       <th>Mobile Number</th>
       <th>Gender</th>
-      <% if can? :update && :destroy, Student %> <th>Actions</th>  <th>&nbsp;</th><%end%>
+      <% if can? :update && :destroy, Student %> <th style="width: 5%;">Actions</th style="width: 5%;">  <th>&nbsp;</th><%end%>
      
    </tr>
   </thead>

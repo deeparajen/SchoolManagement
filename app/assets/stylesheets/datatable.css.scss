@@ -7,7 +7,7 @@ table.pretty th {
     border: 1px solid #fff;
 }
 table.pretty thead th {
-    text-align: left;
+    text-align: center;
     background: #66a9bd;
 }
 table.pretty tbody th {
@@ -45,3 +45,4 @@ table.pretty tbody td+td{
   padding: 10px 0px 0px 12px;
   white-space: nowrap;
 }
+
