@@ -28,7 +28,7 @@ private
         student.mobile_no,
         student.gender,
         link_to(image_tag('edit.png'), edit_student_path(student), :remote => true,  "data-target" => "#myModal"),
-        link_to(image_tag('delete1.png'), student, method: :delete, confirm: "You sure?", title: student.name),
+        link_to(image_tag('delete1.png'), student, method: :delete, :data => {:confirm => 'Are you sure you want to delete this?'}, title: student.name),
       ]
     end
     outer

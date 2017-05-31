@@ -25,7 +25,7 @@ private
         teacher.qualification,
         teacher.mobile_no,
         link_to(image_tag('edit.png'), edit_teacher_path(teacher), :remote => true,  "data-target" => "#myModal"),
-        link_to(image_tag('delete1.png'), teacher, method: :delete, confirm: "You sure?", title: teacher.full_name),
+        link_to(image_tag('delete1.png'), teacher, method: :delete, :data => {:confirm => 'Are you sure you want to delete this?'}, title: teacher.full_name),
       ]
     end
     outer

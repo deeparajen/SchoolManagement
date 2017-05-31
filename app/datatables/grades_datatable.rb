@@ -23,7 +23,7 @@ private
         index + 1 + params[:start].to_i,
         grade.grade_name,
         link_to(image_tag('edit.png'), edit_grade_path(grade), :remote => true,  "data-target" => "#myModal",title: "Edit"),
-        link_to(image_tag('delete1.png'), grade, method: :delete, confirm: "You sure?", title: grade.grade_name),
+        link_to(image_tag('delete1.png'), grade, method: :delete, :data => {:confirm => 'Are you sure you want to delete this?'}, title: grade.grade_name),
       ]
     end
     outer

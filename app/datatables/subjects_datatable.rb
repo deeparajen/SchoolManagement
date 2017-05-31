@@ -23,7 +23,7 @@ private
         index + 1 + params[:start].to_i,
         subject.subject_name,
         link_to(image_tag('edit.png'), edit_subject_path(subject), :remote => true,  "data-target" => "#myModal"),
-        link_to(image_tag('delete1.png'), subject, method: :delete, confirm: "You sure?", title: subject.subject_name),
+        link_to(image_tag('delete1.png'), subject, method: :delete, :data => {:confirm => 'Are you sure you want to delete this?'}, title: subject.subject_name),
       ]
     end
     outer
