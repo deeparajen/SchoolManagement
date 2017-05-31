@@ -23,7 +23,7 @@ class GradesController < ApplicationController
     @grade = Grade.new(grade_params)
     respond_to do |format|
       if @grade.save
-        flash[:success] = "Class '#{@grade.grade_name}' added successfully." 
+        flash[:success] = "Grade '#{@grade.grade_name}' added successfully." 
         format.json { head :no_content }
         format.js
       else
@@ -39,7 +39,7 @@ class GradesController < ApplicationController
       
     respond_to do |format|
       if @grade.update(grade_params)
-        flash[:success] = "Class '#{@grade.grade_name}' updated successfully."
+        flash[:success] = "Grade '#{@grade.grade_name}' updated successfully."
         format.json { head :no_content }
         format.js
       else
@@ -53,7 +53,7 @@ class GradesController < ApplicationController
   def destroy
     @grade.destroy
     respond_to do |format|
-      flash[:success] = "Class '#{@grade.grade_name}' deleted successfully."
+      flash[:success] = "Grade '#{@grade.grade_name}' deleted successfully."
       format.html { redirect_to grades_path }
       format.json { head :no_content }
     end
