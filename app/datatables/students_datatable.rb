@@ -17,8 +17,10 @@ class StudentsDatatable
 private
 
   def data
-    students.map do |student|
-      [
+    outer = []
+    students.each_with_index do |student,index|
+      outer << [
+        index + 1 + params[:start].to_i,
         student.name,
         student.roll_no,
         student.grade.grade_name,
@@ -29,6 +31,7 @@ private
         link_to(image_tag('delete1.png'), student, method: :delete, confirm: "You sure?", title: student.name),
       ]
     end
+    outer
   end
 
   def students

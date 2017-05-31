@@ -17,8 +17,10 @@ class TeachersDatatable
 private
 
   def data
-    teachers.map do |teacher|
-      [
+    outer = []
+    teachers.each_with_index do |teacher,index|
+      outer << [
+        index + 1 + params[:start].to_i,
         teacher.full_name,
         teacher.qualification,
         teacher.mobile_no,
@@ -26,6 +28,7 @@ private
         link_to(image_tag('delete1.png'), teacher, method: :delete, confirm: "You sure?", title: teacher.full_name),
       ]
     end
+    outer
   end
 
   def teachers

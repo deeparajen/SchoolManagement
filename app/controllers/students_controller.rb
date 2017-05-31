@@ -16,6 +16,9 @@ class StudentsController < ApplicationController
   # GET /students/new
   # GET /students/new.json
   def new
+    respond_to do |format|
+      format.js
+    end
   end
 
   # GET /students/1/edit

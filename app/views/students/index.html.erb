@@ -13,9 +13,10 @@
   <!-- <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   </div> -->
 <div style="clear:both">&nbsp;</div>
-<table id="students" class="display table dataTable table-striped table-bordered table-condensed pretty" data-source="<%= students_url(format: "json") %>" >
+<table id="students" class="display table dataTable table-striped table-bordered table-condensed pretty" data-source="<%= students_url(format: "json") %>" style="width:100%"%>
   <thead>
     <tr>
+      <th>S.No </th>
       <th>Student Name</th>
       <th>Roll Number</th>
       <th>Grade</th>
@@ -32,4 +33,3 @@
 <%= render 'dialog' %>
 </div>
 </div>
-

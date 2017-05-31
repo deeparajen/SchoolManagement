@@ -1,8 +1,8 @@
-$("#myModal").html("<%= escape_javascript(render 'subjects/form',:object => @student) %>");
-$('#myModal h3').html("Edit Subject");
-$("#myModal").modal('show');
+$("#myModal_subject").html("<%= escape_javascript(render 'subjects/form',:object => @student) %>");
+$('#myModal_subject h3').html("Edit Subject");
+$("#myModal_subject").modal('show');
 // Set focus to the first element
-$('#myModal').on('shown.bs.modal', function () {
+$('#myModal_subject').on('shown.bs.modal', function () {
 	  $('.subject_name').focus()
   })
 

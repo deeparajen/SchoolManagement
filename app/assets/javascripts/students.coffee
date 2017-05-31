@@ -9,4 +9,3 @@ jQuery ->
     bServerSide: true
     "ordering": false
     sAjaxSource: $('#students').data('source')
-   

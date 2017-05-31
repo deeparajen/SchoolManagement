@@ -1,7 +1,8 @@
-$("#myModal").html("<%= escape_javascript(render 'grades/form') %>");
-$('#myModal h3').html("New Class");
-$("#myModal").modal('show');
+$("#myModal_grade").html("<%= escape_javascript(render 'grades/form') %>");
+$('#myModal_grade h3').html("New Class");
+$("#myModal_grade").modal('show');
 // Set focus to the first element
-$('#myModal').on('shown.bs.modal', function () {
+$('#myModal_grade').on('shown.bs.modal', function () {
 	  $('.grade_name').focus()
   })
+

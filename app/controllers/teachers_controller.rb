@@ -10,13 +10,11 @@ class TeachersController < ApplicationController
     end
   end
 
-  # GET /movies/1
-  # GET /movies/1.json
-  def show
-  end
-
-  # GET /movies/new
+   # GET /movies/new
   def new
+    respond_to do |format|
+      format.js
+    end
   end
 
   # GET /movies/1/edit

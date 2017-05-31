@@ -17,13 +17,16 @@ class SubjectsDatatable
 private
 
   def data
-    subjects.map do |subject|
-      [
+    outer = []
+    subjects.each_with_index do |subject,index|
+      outer << [
+        index + 1 + params[:start].to_i,
         subject.subject_name,
         link_to(image_tag('edit.png'), edit_subject_path(subject), :remote => true,  "data-target" => "#myModal"),
         link_to(image_tag('delete1.png'), subject, method: :delete, confirm: "You sure?", title: subject.subject_name),
       ]
     end
+    outer
   end
 
   def subjects

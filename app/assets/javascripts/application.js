@@ -24,7 +24,9 @@
 
 // to handle modal box form validation
 $(document).ajaxError(function(event,xhr,options,exc) {
-    
+    if (event) {
+        event.preventDefault();
+      }
     var errors = JSON.parse(xhr.responseText);
     var er ="<ul>";
     for(var i = 0; i < errors.length; i++){

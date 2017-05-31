@@ -37,9 +37,12 @@
     <%= label :gender, 'Female' %>
                            
     </div> 
-
-  <div class="form-group">
-    <%= f.submit  @student.new_record? ? "Create Student" : "Update Student", :class => "btn btn-primary" %>
+</div>
+</div>
+<div class="row">
+ <div class="col-sm-12 col-md-12">
+  <div class="form-group text-center">
+    <%= f.submit  @student.new_record? ? "Register Student" : "Update Student", :class => "btn btn-primary" %>
   </div>
 </div>
 </div>

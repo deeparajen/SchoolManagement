@@ -4,4 +4,7 @@ class Grade < ApplicationRecord
  
  validates :grade_name, presence: true
  validates :grade_name, :uniqueness => true
+
+ default_scope ->{ order(grade_name: :asc) }
+
 end

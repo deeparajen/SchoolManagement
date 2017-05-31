@@ -17,13 +17,16 @@ class GradesDatatable
 private
 
   def data
-    grades.map do |grade|
-      [
+    outer = []
+    grades.each_with_index do |grade,index|
+     outer << [
+        index + 1 + params[:start].to_i,
         grade.grade_name,
         link_to(image_tag('edit.png'), edit_grade_path(grade), :remote => true,  "data-target" => "#myModal",title: "Edit"),
         link_to(image_tag('delete1.png'), grade, method: :delete, confirm: "You sure?", title: grade.grade_name),
       ]
     end
+    outer
   end
 
   def grades
