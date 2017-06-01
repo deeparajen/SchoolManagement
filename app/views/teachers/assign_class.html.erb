@@ -120,11 +120,12 @@ input[type="checkbox"] {
    function validate_assign()
    {
    	var errorList = [];
+   	<%if current_user.role? :admin %>
    	if (document.assign_form.teacher_id.value == "")
    	{
    		errorList.push("Please select teacher");
    	}
-   	
+   	<%end%>
    	if (jQuery('[name="teacher[grade_ids][]"]:checked').length == 0)
    	{
    		errorList.push("Please select Classes");
