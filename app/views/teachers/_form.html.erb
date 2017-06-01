@@ -16,10 +16,21 @@
     <%= f.label :mobile_no, :class => "control-label" %>
     <%= f.text_field :mobile_no, :class => "form-control" %>
   </div>
- 
+ </div>
+</div>
+
+<div class="row">
+ <div class="col-sm-6 col-md-12">
   <div class="form-group">
-    <%= f.submit  @teacher.new_record? ? "Create Teacher" : "Update Teacher", :class => "btn btn-primary" %>
+    <%= f.submit  @teacher.new_record? ? "Create Teacher" : "Update Teacher", :class => "btn btn-primary btn-md col-md-4 btn-primary-spacing" %>
+    <%= f.submit "Cancel", :class => "btn btn-default btn-md col-md-2", "data-dismiss" => "modal", "aria-hidden" => true, :style => "padding: 10px 16px; font-size: 16px;"%>
   </div>
 </div>
 </div>
 <% end %>
+<style>
+	.btn-primary-spacing 
+{
+margin-right: 8px;
+}
+</style>

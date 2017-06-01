@@ -42,8 +42,15 @@
 <div class="row">
  <div class="col-sm-12 col-md-12">
   <div class="form-group text-center">
-    <%= f.submit  @student.new_record? ? "Register Student" : "Update Student", :class => "btn btn-primary" %>
+    <%= f.submit  @student.new_record? ? "Register Student" : "Update Student", :class => "btn btn-primary btn-md col-md-4 btn-primary-spacing" %>
+    <%= f.submit "Cancel", :class => "btn btn-default btn-md col-md-2", "data-dismiss" => "modal", "aria-hidden" => true, :style => "padding: 10px 16px; font-size: 16px;"%>
   </div>
 </div>
 </div>
 <% end %>
+<style>
+	.btn-primary-spacing 
+{
+margin-right: 10px;
+}
+</style>
