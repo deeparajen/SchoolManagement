@@ -1,9 +1,11 @@
 class SendSmsController < ApplicationController
   before_action :authenticate_user!
+  #load_and_authorize_resource
   
   def create_sms
+    #@teacher = !params[:teacher_id].nil?? Teacher.where(:id => params[:teacher_id]).first : Teacher.where(:full_name => current_user.name).first
     @teacher = Teacher.where(:full_name => current_user.name).first
-    @grades =@teacher.grades
+    @grades = current_user.role.name == "Admin" && @teacher.nil? ?  Grade.all : @teacher.grades 
     #@grades= Grade.where(:id => @teacher.grades.map(&:id))
   end
   

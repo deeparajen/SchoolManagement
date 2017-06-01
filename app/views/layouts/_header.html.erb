@@ -25,12 +25,7 @@
             <%end%>
             
             
-            <%if current_user.role? :staff%>
-            <li class="nav-item active">
-              <%= link_to 'Send SMS', sms_path, {:class => 'nav-link'} %>
-            </li>
-            <%end%>
-            <li class="nav-item dropdown">
+             <li class="nav-item dropdown">
               <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Add New <span class="caret"></span></a>
               <ul class="dropdown-menu">
               	<li><%= link_to "Class", grades_path, class: "dropdown-item" %></li>
@@ -40,7 +35,9 @@
               	<li><%= link_to 'Assign Classes', assign_class_path, {:class => 'dropdown-item'} %></li>
               </ul>
             </li>
-            
+            <li class="nav-item active">
+              <%= link_to 'Send SMS', sms_path, {:class => 'nav-link'} %>
+            </li>
             
             <%end%>
    			</ul>

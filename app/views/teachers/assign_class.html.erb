@@ -1,8 +1,11 @@
 <div id="update_chk_div">
 <h3> Assign Classes</h3>
+<br/>
 
-
-<%= form_for @teacher,:url => update_class_teacher_path,:method => "post", :html => { :class => "form-horizontal" } do |f| %>
+<%= form_for @teacher,:url => update_class_teacher_path,:method => "post", :html => { :class => "form-horizontal",:onsubmit=>"return validate_assign(this);" ,:name => "assign_form",:id=> "assign_form" } do |f| %>
+    
+    <div id="error_explanation" class="bg-danger text-danger" style="width:70%">
+	 </div>
    
    	<%if current_user.role? :admin%>
 	<div class="row">
@@ -28,8 +31,10 @@
   	</div>
  
  <div class="row">
- 	<div class="col-md-12 text-center">
- 		<%= f.submit :class => "btn btn-success",:value => "Assign Classes" %></div>
+ 	<div class="col-md-8 text-center">
+ 		<div class="form">
+ 		<%= f.button 'Assign Classes', :class => "btn btn-success",:value => "Assign Classes",:type=>"submit" %></div>
+ 		</div>
  	</div>
  </div> 
  
@@ -89,13 +94,15 @@ input[type="checkbox"] {
 </style>
 
  <script>
-    $(document).ready(function() { $("#teacher_id").select2({
-    	width: '50%',
+    $(document).ready(function() { 
+    	$("#teacher_id").select2({
+    	width: '30%',
     	placeholder: "Select Teacher",
     	theme: "classic",
     	language: "es"
     	 });
      });
+    
      
 
   </script>
@@ -109,4 +116,30 @@ input[type="checkbox"] {
     dataType : "script"
   });
    }
+   
+   function validate_assign()
+   {
+   	var errorList = [];
+   	if (document.assign_form.teacher_id.value == "")
+   	{
+   		errorList.push("Please select teacher");
+   	}
+   	
+   	if (jQuery('[name="teacher[grade_ids][]"]:checked').length == 0)
+   	{
+   		errorList.push("Please select Classes");
+   	}
+   	
+   	if (errorList.length > 0) {
+   		$("#error_explanation").empty().append(function(){
+    	return "<ul><li>" + errorList.join("</li><li>") + "</li></ul>";
+   		});
+   		var x = $("#error_explanation").position(); //gets the position of the div element...
+        window.scrollTo(x.left, x.top);
+     return false;
+    }
+    return true;
+   }
+   
+
   </script>

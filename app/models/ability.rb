@@ -11,7 +11,7 @@ class Ability
         can :assign_class, Teacher
         can :update_class_teacher, Teacher
         can :update_grade,Teacher
-        #can :create_sms, SendSms
+        can :create_sms, SendSms
         # can :update, Article do |article|
           # article.try(:user) == user
         # end
