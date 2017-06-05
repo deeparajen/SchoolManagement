@@ -20,7 +20,7 @@ private
     outer = []
     teachers.each_with_index do |teacher,index|
       outer << [
-        index + 1 + params[:start].to_i,
+        index + 1 + params[:iDisplayStart].to_i,
         teacher.full_name,
         teacher.qualification,
         teacher.mobile_no,

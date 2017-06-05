@@ -2,11 +2,16 @@
 <html lang="en">
   <head>
     <title>School Management</title>
-    <%= csrf_meta_tags %>
+    
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+	<meta name="turbolinks-cache-control" content="no-cache">
+	
+     
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'true' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'true' %>
+    <%= csrf_meta_tags %>
   </head>
 
   <body>
@@ -18,11 +23,13 @@
     <div class="container">
     	
     <div class="row">
-        <div class="col-xs-12 col-md-12" id="flash-msg">
-          <% flash.each do |name, msg| -%>
+        <div class="col-xs-12 col-md-12" id="flash_messages">
+        	<%= render 'shared/flash_messages' if !flash.empty? %>
+         	
+       <!--   <% flash.each do |name, msg| -%>
             <%= content_tag :div, msg, class: "alert alert-#{['success','notice'].include?(name) ? 'success' : 'danger'}", :id => "flash_#{name}"%>
           <% end -%>
-          <%#= flash_messages %>
+          <%#= flash_messages %> -->
         </div>
         
       </div>
@@ -39,11 +46,15 @@
 
     </div><!-- /.container -->
 
- 
 
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+	
+
   </body>
+  
 </html>
+
+<style>
+.close {
+	font-size: 1.25rem !important;
+}
+</style>

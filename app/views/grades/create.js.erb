@@ -1,9 +1,7 @@
- // $('table tbody').append('<%= j render "grade_row", grade: @grade %>'); 
 <% if @grade.errors.blank? %>
-  $('#myModal_grade').modal('hide');
+  $('#myModal_grade').modal('toggle');
   $('#grades').DataTable().ajax.reload();
-  $('#flash-msg').html("<%=j flash[:success] %>");
-  $('#flash-msg').addClass("alert alert-success");
+  $("#flash_messages").html("<%= escape_javascript(render 'shared/flash_messages') %>");
   console.log("<%= @grade.grade_name %>  created");
 <% else %>
 	$('#myModal_grade').modal('show');

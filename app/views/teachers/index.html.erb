@@ -4,7 +4,7 @@
 
 <div class="text-right">
 	<% if can? :create, Teacher %>
-		<%= link_to "New Teacher", new_teacher_path, :class => "btn btn-primary success", :remote => true, :style=> "padding: 3px 6px; font-size: 14px;" %>
+		<%= link_to "New Teacher", new_teacher_path, :class => "btn btn-primary success","data-target"=>"#dialog_teacher", :remote => true, :style=> "padding: 3px 6px; font-size: 14px;" %>
 	<%end%>
 </div>
  

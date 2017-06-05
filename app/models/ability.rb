@@ -1,7 +1,6 @@
 class Ability
   include CanCan::Ability
   
-
   def initialize(user)
    
     if user.role? :admin
@@ -11,7 +10,7 @@ class Ability
         can :assign_class, Teacher
         can :update_class_teacher, Teacher
         can :update_grade,Teacher
-        can :create_sms, Sm
+        can :manage, Sm
         # can :update, Article do |article|
           # article.try(:user) == user
         # end

@@ -1,0 +1,17 @@
+<div class="col-md-10 form-group" style="margin: 20px 0px 15px 50px;">
+	   <%= label_tag 'grade', nil, class: 'col-md-3 control-label',:style => "font-weight: bold;"%>
+    	<%#= f.label :grade, :class => "col-md-3 control-label", :style => "font-weight: bold;"%>
+    	<%= select_tag "grade_id", options_for_select(@grades.collect{ |u| [u.grade_name, u.id]}), {:include_blank => true,:class =>"col-md-6 form-control select2"} %>
+   		<%#=  select_tag 'grade_id', options_for_select(@grades.collect {|c| [c.grade_name, c.id]}), { :include_blank => true},{:class => "col-md-6 form-control select2"}%>
+</div>
+
+<script>
+    $(document).on('turbolinks:load', function() { $("#grade_id").select2({
+    	width: '30%',
+    	placeholder: "Select Class",
+    	theme: "classic",
+    	language: "es",
+    	allowClear: true
+    	 });
+     });
+</script>

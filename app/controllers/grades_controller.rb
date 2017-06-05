@@ -23,7 +23,7 @@ class GradesController < ApplicationController
     @grade = Grade.new(grade_params)
     respond_to do |format|
       if @grade.save
-        flash[:success] = "Grade '#{@grade.grade_name}' added successfully." 
+        flash.now[:success] = "Grade '#{@grade.grade_name}' added successfully." 
         format.json { head :no_content }
         format.js
       else
@@ -39,7 +39,7 @@ class GradesController < ApplicationController
       
     respond_to do |format|
       if @grade.update(grade_params)
-        flash[:success] = "Grade '#{@grade.grade_name}' updated successfully."
+        flash.now[:success] = "Grade '#{@grade.grade_name}' updated successfully."
         format.json { head :no_content }
         format.js
       else

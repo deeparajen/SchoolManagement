@@ -1,19 +1,21 @@
-   <div class="modal-dialog" role="document" style: "padding-top: 10px;">
+   <div class="modal-dialog"  style: "padding-top: 10px;">
     <div class="modal-content">
       <div class="modal-header">
       	 <h3 class="modal-title"></h3>
       	 
-        <button type="button" class="close" data-dismiss="modal"aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
+        <button type="button" class="close" 
+                data-dismiss="modal" 
+                aria-label="Close">
+                <span aria-hidden="true">&times;</span></button>
+        
+     
        
       </div>
       
-      <%= form_for @grade, remote: true do |f| %>
-      
-      
+      <%= form_for @grade, remote: true, :html => { :role => "form" } do |f| %>
       <div class="modal-body">
-      	<div id="error_explanation" class="bg-danger text-danger">
+      	
+ 	    <div id="error_explanation" class="bg-danger text-danger">
 	    </div>
 	    
       	<div class="row">

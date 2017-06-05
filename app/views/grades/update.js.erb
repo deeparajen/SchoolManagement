@@ -1,8 +1,7 @@
 <% if @grade.errors.blank? %>
   $('#myModal_grade').modal('hide');
   $('#grades').DataTable().ajax.reload();
-  $('#flash-msg').html("<%=j flash[:success] %>");
-  $('#flash-msg').addClass("alert alert-success");
+  $("#flash_messages").html("<%= escape_javascript(render 'shared/flash_messages') %>");
 <% else %>
 	$('#myModal_grade').modal('show');
   // TODO: show the errors in the UI

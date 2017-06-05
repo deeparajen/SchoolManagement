@@ -33,6 +33,9 @@ gem 'jbuilder', '~> 2.5'
 # gem 'redis', '~> 3.0'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
+source 'https://rails-assets.org' do
+  gem 'rails-assets-tether', '>= 1.1.0'
+end
 
 
 # Use Capistrano for deployment
@@ -66,5 +69,6 @@ gem 'bootstrap', '4.0.0.alpha6'
 
 gem 'jquery-datatables-rails', github: 'rweng/jquery-datatables-rails'
 gem 'jquery-ui-rails'
+#gem 'jquery-turbolinks'
 
 gem 'will_paginate'

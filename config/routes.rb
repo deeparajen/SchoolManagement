@@ -12,9 +12,10 @@ Rails.application.routes.draw do
   get "assign_class", to: "teachers#assign_class", :as => "assign-class"
   post "update_class_teacher", to: "teachers#update_class_teacher"
   get "update_grade" => "teachers#update_grade"
-  get "sms", to: "send_sms#create_sms"
-  post 'send_sms', to: "send_sms#update_sms"
-  get 'send_sms/update_student_list', :as => 'update_student_list'
+  get "update_grade_list" => "sms#update_grade_list"
+  get "sms", to: "sms#create_sms"
+  post 'send_sms', to: "sms#update_sms"
+  #get 'send_sms/update_student_list', :as => 'update_student_list'
   
   
   # The priority is based upon order of creation: first created -> highest priority.

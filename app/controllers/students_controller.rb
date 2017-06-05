@@ -1,6 +1,7 @@
 class StudentsController < ApplicationController
   before_action :set_student, only: [:edit, :update, :destroy]
   before_action :authenticate_user!, except: [:index]
+  skip_before_action :verify_authenticity_token
   load_and_authorize_resource
 
   # GET /students
@@ -16,9 +17,6 @@ class StudentsController < ApplicationController
   # GET /students/new
   # GET /students/new.json
   def new
-    respond_to do |format|
-      format.js
-    end
   end
 
   # GET /students/1/edit
@@ -28,16 +26,14 @@ class StudentsController < ApplicationController
   # POST /students
   # POST /students.json
   def create
-    @student = Student.new(student_params)
-
+    @student = Student.create(student_params)
     respond_to do |format|
       if @student.save
-        flash[:success] = "Student '#{@student.name}' added successfully." 
+        flash.now[:success] = "Student '#{@student.name}' added successfully." 
         format.json { head :no_content }
         format.js
       else
-        format.json { render json: @student.errors.full_messages, 
-                            status: :unprocessable_entity }
+        format.json { render json: @student.errors.full_messages, status: :unprocessable_entity }
       end
       
     end
@@ -48,7 +44,7 @@ class StudentsController < ApplicationController
   def update
     respond_to do |format|
       if @student.update(student_params)
-        flash[:success] = "Student '#{@student.name}' updated successfully."
+        flash.now[:success] = "Student '#{@student.name}' updated successfully."
         format.json { head :no_content }
         format.js
       else
@@ -64,7 +60,8 @@ class StudentsController < ApplicationController
   def destroy
     @student.destroy
     respond_to do |format|
-      format.html { redirect_to students_url, notice: "Student '#{@student.name}' was successfully deleted." }
+      flash[:success]= "Student '#{@student.name}' was successfully deleted."
+      format.html { redirect_to students_url }
       format.json { head :no_content }
     end
   end

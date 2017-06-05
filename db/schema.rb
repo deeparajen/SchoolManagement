@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170523172517) do
+ActiveRecord::Schema.define(version: 20170605215722) do
 
   create_table "Grades_Teachers", id: false, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "grade_id",   null: false
@@ -103,7 +103,7 @@ ActiveRecord::Schema.define(version: 20170523172517) do
 
   create_table "students", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "grade_id"
-    t.integer  "roll_no"
+    t.string   "roll_no"
     t.string   "name"
     t.string   "father_name"
     t.string   "mobile_no"

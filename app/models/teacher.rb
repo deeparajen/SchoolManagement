@@ -1,6 +1,6 @@
 class Teacher < ApplicationRecord
-  has_one :sm
-  has_and_belongs_to_many :grades
+  has_one :sm,dependent: :destroy
+  has_and_belongs_to_many :grades,dependent: :destroy
  
  validates :mobile_no, length: {is: 10, message: "must be 10 digit long."},  numericality: { only_integer: true }, uniqueness: true
  validates :full_name, presence: true

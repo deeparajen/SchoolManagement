@@ -14,7 +14,7 @@
   </div>
   <div class="form-group">
     <%= f.label :grade_id, :class => "control-label" %>
-    <%=  f.select :grade_id, options_for_select(Grade.all.collect {|c| [c.grade_name, c.id]},:selected => @student.grade_id), { :include_blank => "Please select Class"}, {:class => "form-control"}%>
+    <%=  f.select :grade_id, options_for_select(Grade.all.collect {|c| [c.grade_name, c.id]},:selected => @student.grade_id), {:include_blank=>true,:class => "form-control select2"}%>
   </div>
 </div>
 
@@ -42,7 +42,9 @@
 <div class="row">
  <div class="col-sm-12 col-md-12">
   <div class="form-group text-center">
-    <%= f.submit  @student.new_record? ? "Register Student" : "Update Student", :class => "btn btn-primary btn-md col-md-4 btn-primary-spacing" %>
+  	<%@button_label = @student.new_record? ? "Register Student" : "Update Student"%>
+  	<button type="submit" value="<%= @button_label%>" class="btn btn-primary btn-md col-md-4 btn-primary-spacing" id="submit"><%= @button_label%></button>
+    <%#= f.submit  @student.new_record? ? "Register Student" : "Update Student", :class => "btn btn-primary btn-md col-md-4 btn-primary-spacing" %>
     <%= f.submit "Cancel", :class => "btn btn-default btn-md col-md-2", "data-dismiss" => "modal", "aria-hidden" => true, :style => "padding: 10px 16px; font-size: 16px;"%>
   </div>
 </div>
@@ -54,3 +56,15 @@
 margin-right: 10px;
 }
 </style>
+
+
+<script>
+    $(document).ready(function() { $('#student_grade_id').select2({
+    	width: '100%',
+    	placeholder: "Please select Class",
+    	theme: "classic",
+    	language: "es",
+    	allowClear: true
+    	 });
+     });
+</script>

@@ -1,8 +1,7 @@
 <% if @subject.errors.blank? %>
   $('#myModal_subject').modal('hide');
   $('#subjects').DataTable().ajax.reload();
-  $('#flash-msg').html("<%=j flash[:success] %>");
-  $('#flash-msg').addClass("alert alert-success");
+  $("#flash_messages").html("<%= escape_javascript(render 'shared/flash_messages') %>");
 <% else %>
 	$('#myModal_subject').modal('show');
 <% end %>

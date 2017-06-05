@@ -1,7 +1,6 @@
 $('#dialog_teacher').modal('toggle');
 $('#teachers').DataTable().ajax.reload();
-$('#flash-msg').html("<%=j flash[:success] %>");
-$('#flash-msg').addClass("alert alert-success");
+$("#flash_messages").html("<%= escape_javascript(render 'shared/flash_messages') %>");
 console.log("<%= @teacher.full_name %>  created");
 
 

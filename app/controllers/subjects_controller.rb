@@ -22,7 +22,7 @@ class SubjectsController < ApplicationController
 
    respond_to do |format|
       if @subject.save
-        flash[:success] = "Subject '#{@subject.subject_name}' added successfully." 
+        flash.now[:success] = "Subject '#{@subject.subject_name}' added successfully." 
         format.json { head :no_content }
         format.js
       else
@@ -37,7 +37,7 @@ class SubjectsController < ApplicationController
   
     respond_to do |format|
       if @subject.update(subject_params)
-        flash[:success] = "Subject '#{@subject.subject_name}' updated successfully."
+        flash.now[:success] = "Subject '#{@subject.subject_name}' updated successfully."
         format.json { head :no_content }
         format.js
       else
