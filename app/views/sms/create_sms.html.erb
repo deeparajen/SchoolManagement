@@ -2,7 +2,10 @@
 <h3> SMS Creation</h3>
 
 
-<%= form_for Sm.new,:url => send_sms_path,:method => "post", :html => { :class => "form-horizontal" } do |f| %>
+<%= form_for Sm.new,:url => send_sms_path,:method => "post", :html => { :class => "form-horizontal",:onsubmit=>"return validate(this)"} do |f| %>
+   <div id="error_explanation" class="bg-danger text-danger">
+	 </div>
+   
    <%if current_user.role.name == "Admin" %>
 	<div class="row">
    	  <div class="col-md-10 form-group" style="margin: 20px 0px 15px 50px;">
@@ -16,28 +19,32 @@
    	  <div class="col-md-10 form-group" style="margin: 20px 0px 15px 50px;">
     	<%= f.label :grade, :class => "col-md-3 control-label", :style => "font-weight: bold;"%>
     	<%= select_tag "grade_id", options_for_select(@grades.collect{ |u| [u.grade_name, u.id]}), {:include_blank => true,:class =>"col-md-6 form-control select2"} %>
-   		<%#=  select_tag 'grade_id', options_for_select(@grades.collect {|c| [c.grade_name, c.id]}), { :include_blank => true},{:class => "col-md-6 form-control select2"}%>
   	  </div>
   	</div>
   	
   	<div class="row">
     	<div class="col-md-10 form-group" style="margin: 20px 0px 15px 50px;">
+    		<div>
   		<%= f.label :task_date,:class =>"col-md-3 control-label", :style => "font-weight: bold; " %>
   		<%= f.text_field :task_date, placeholder: "task date", value: Time.now.strftime("%Y-%m-%d"), class: 'col-md-3 form-control', "data-provide" => 'datepicker', "data-date-format" => "yyyy-mm-dd", "data-date-autoclose" => "true", :style =>"width:20%" %>
   		</div>
+  		</div>
 	</div>
-  
+	
+
+
     <div class="row">
     	<div class="col-md-10 form-group" style="margin: 20px 0px 15px 50px;">
   		<%= f.label :sms_content,:class =>"col-md-3 control-label", :style => "font-weight: bold; " %>
   		<%= f.text_area :sms_content, :rows => 5, :cols => 100,:class => 'col-md-9  form-control', :style => "width: 50%"%>
   		</div>
 	</div>
-   
+
 	
  <div class="row">
  	<div class="col-md-10 text-center">
- 		<%= f.submit :class => "btn btn-success",:value => "Send SMS" %></div>
+ 		<%= f.button 'Send SMS', :class => "btn btn-success",:value => "Send SMS",:type=>"submit" %></div>
+ 		<%#= f.submit :class => "btn btn-success",:value => "Send SMS" %></div>
  	</div>
  </div> 
  
@@ -112,3 +119,48 @@ div.center, p.center, img.center {
      }
      
  </script>
+
+<script>
+  function validate(e) {
+  	//e.preventDefault();
+  var selectedDate = $('#sm_task_date').datepicker('getDate');
+  var today = new Date(); 
+  var targetDate= new Date();
+  targetDate.setDate(today.getDate());
+  targetDate.setHours(0);
+  targetDate.setMinutes(0);
+  targetDate.setSeconds(0);
+
+   var errorList = [];
+   <%if current_user.role? :admin %>
+   	if ($('#sm_teacher_id').val() == "")
+   	{
+   		errorList.push("Please select teacher");
+   	}
+   	<%end%>
+   if ($('#grade_id').val() == "")
+   	{
+   		errorList.push("Please select Class");
+   	}
+   if ($('#sm_sms_content').val() == "")
+   {
+   	   errorList.push("SMS content should not be empty");
+   }
+   if ($('#sm_task_date').val() == "")
+   {
+   	  errorList.push("Task Date should not be empty");
+   }
+   else if (Date.parse(targetDate ) > Date.parse(selectedDate)) {
+    	errorList.push("Please select the valid date");
+  }
+    if (errorList.length > 0) {
+   		$("#error_explanation").empty().append(function(){
+    	return "<ul><li>" + errorList.join("</li><li>") + "</li></ul>";
+   		});
+   		var x = $("#error_explanation").position(); //gets the position of the div element...
+        window.scrollTo(x.left, x.top);
+     return false;
+    }
+    return true;
+}
+</script>

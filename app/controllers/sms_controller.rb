@@ -15,7 +15,7 @@ class SmsController < ApplicationController
     respond_to do |format|
       format.js
     end
-  end
+ end
   
   def update_sms
     @flag=false
